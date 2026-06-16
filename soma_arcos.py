@@ -6,10 +6,10 @@ class SomaArcos(MovingCameraScene):
 
         self.play(self.camera.frame.animate.scale(1.3))
 
-        # plano = NumberPlane(
-        #     background_line_style={'stroke_opacity': 0.4}
-        # )
-        # self.add(plano)
+        plano = NumberPlane(
+            background_line_style={'stroke_opacity': 0.4}
+        )
+        self.add(plano)
         
         A = np.array([-2, 3, 0])
         B = np.array([-2, -3, 0])
@@ -120,8 +120,8 @@ class SomaArcos(MovingCameraScene):
         self.wait()
 
         sen_alfa_beta2 = MathTex(r"\sin(\alpha+\beta) = x ").shift(12*RIGHT + 2*UP)
-        
-        self.play(Transform(sen_alfa_beta, sen_alfa_beta2))
+    
+        self.play(sen_alfa_beta2.animate.shift(1*DOWN))
 
         self.wait()
 
@@ -139,23 +139,25 @@ class SomaArcos(MovingCameraScene):
 
         self.play(Create(linha_tracejada1), Create(linha_tracejada2))
 
-        linha_cos_alfa_beta = Line(I, J)
+        # seno de alfa + beta
+
+        linha_cos_alfa_beta = Line(C, D)
 
         label_cos_alfa_beta3 = MathTex(r"\sin(\alpha+\beta)").shift(4.3*RIGHT).rotate(90*DEGREES)
 
-        self.play(Create(linha_cos_alfa_beta))
+        self.play(linha_cos_alfa_beta.animate.shift(2*RIGHT))
 
         self.play(FadeIn(label_cos_alfa_beta3))
 
         self.wait()
 
-        cos_alfa_beta = MathTex(r"\cos(\alpha+\beta)=\frac{y}{1}").shift(12*RIGHT)
+        cos_alfa_beta = MathTex(r"\cos(\alpha+\beta)=\frac{y}{1}").shift(12*RIGHT + 1*DOWN)
 
         self.play(FadeIn(cos_alfa_beta))
 
-        cos_alfa_beta2 = MathTex(r"\cos(\alpha+\beta) = y").shift(12*RIGHT)
+        cos_alfa_beta2 = MathTex(r"\cos(\alpha+\beta) = y").shift(12*RIGHT + 1*DOWN)
 
-        self.play(Transform(cos_alfa_beta, cos_alfa_beta2))
+        self.play(cos_alfa_beta2.animate.shift(1*DOWN))
 
         self.wait()
 
@@ -166,7 +168,7 @@ class SomaArcos(MovingCameraScene):
 
         self.wait()
 
-        self.play(FadeOut(grupo_tri_3), FadeOut(label_x), FadeOut(label_y), FadeOut(cos_alfa_beta), FadeOut(sen_alfa_beta))
+        self.play(FadeOut(grupo_tri_3), FadeOut(label_x), FadeOut(label_y), FadeOut(cos_alfa_beta), FadeOut(sen_alfa_beta), FadeOut(sen_alfa_beta2), FadeOut(cos_alfa_beta2))
 
         self.wait(2)
 
@@ -197,35 +199,35 @@ class SomaArcos(MovingCameraScene):
 
         seno_alfa2 = MathTex(r"\sin(\alpha) = m", color=BLUE).shift(12.5*RIGHT + 2*UP)
 
-        self.play(Transform(seno_alfa, seno_alfa2))
+        self.play(seno_alfa2.animate.shift(1*DOWN))
 
         self.wait(2)
 
-        seno_alfa3 = MathTex(r"\sin(\alpha)", color=BLUE).rotate(125*DEGREES).shift(2.5*RIGHT + 1.8*UP).scale(0.7)
+        seno_alfa3 = MathTex(r"\sin(\alpha)", color=BLUE).shift(12.5*RIGHT + 1*UP).scale(0.7)
 
-        self.play(FadeIn(seno_alfa3))
+        self.play(seno_alfa3.animate.rotate(125*DEGREES).shift(10.1*LEFT + 1*UP))
 
         self.wait()
 
-        cos_alfa = MathTex(r"\cos(\alpha)=\frac{n}{1}", color=BLUE).shift(12.5*RIGHT)
+        cos_alfa = MathTex(r"\cos(\alpha)=\frac{n}{1}", color=BLUE).shift(12.5*RIGHT + 1*DOWN)
 
         self.play(FadeIn(cos_alfa))
 
         self.wait(2)
 
-        cos_alfa2 = MathTex(r"\cos(\alpha) = n", color=BLUE).shift(12.5*RIGHT)
+        cos_alfa2 = MathTex(r"\cos(\alpha) = n", color=BLUE).shift(12.5*RIGHT + 1*DOWN)
 
-        self.play(Transform(cos_alfa, cos_alfa2))
-
-        self.wait()
-
-        cos_alfa3 = MathTex(r"\cos(\alpha)", color=BLUE).rotate(35*DEGREES).shift(1*RIGHT + 0.5*DOWN).scale(0.7)
-
-        self.play(FadeIn(cos_alfa3))
+        self.play(cos_alfa2.animate.shift(1*DOWN))
 
         self.wait()
 
-        self.play(FadeOut(grupo_tri_1, seno_alfa, cos_alfa, label_m, label_n))
+        cos_alfa3 = MathTex(r"\cos(\alpha)", color=BLUE).shift(12.5*RIGHT + 2*DOWN).scale(0.7)
+
+        self.play(cos_alfa3.animate.shift(12*LEFT + 1*UP).rotate(35*DEGREES))
+
+        self.wait()
+
+        self.play(FadeOut(grupo_tri_1, seno_alfa, cos_alfa, label_m, label_n, seno_alfa2, cos_alfa2))
 
         self.wait()
 
@@ -238,7 +240,7 @@ class SomaArcos(MovingCameraScene):
         cos_alfa4 = cos_alfa3.copy()
         grupo_tri_2.add(tri_2_2, beta_label_3, angulo_beta3, angulo_reto2_2, cos_alfa4)
 
-        self.play(grupo_tri_2.animate.shift(7*RIGHT))
+        self.play(grupo_tri_2.animate.shift(7*RIGHT + 0.5*DOWN))
 
         self.wait()
 
@@ -257,13 +259,13 @@ class SomaArcos(MovingCameraScene):
 
         sen_beta2 = MathTex(r"r = \cos(\alpha)\cdot\sin(\beta)", color=GREEN).shift(2*UP + 7*RIGHT)
 
-        self.play(Transform(sen_beta, sen_beta2))
+        self.play(sen_beta2.animate.shift(1*DOWN))
 
         self.wait()
 
-        sen_beta3 = MathTex(r"\cos(\alpha)\cdot\sin(\beta)", color=GREEN).rotate(90*DEGREES).scale(0.7).shift(1.2*DOWN + 3.2*RIGHT)
+        sen_beta3 = MathTex(r"\cos(\alpha)\cdot\sin(\beta)", color=GREEN).scale(0.7).shift(1*UP + 7*RIGHT)
 
-        self.play(FadeIn(sen_beta3))
+        self.play(sen_beta3.animate.rotate(90*DEGREES).shift(2*DOWN + 3.8*LEFT))
 
         self.wait()
 
@@ -275,17 +277,17 @@ class SomaArcos(MovingCameraScene):
 
         cos_beta2 = MathTex(r"s = \cos(\alpha)\cdot\cos(\beta)", color=GREEN).shift(2*UP + 11.5*RIGHT)
 
-        self.play(Transform(cos_beta, cos_beta2))
+        self.play(cos_beta2.animate.shift(1*DOWN))
 
         self.wait()
 
-        cos_beta3 = MathTex(r"\cos(\alpha)\cdot\cos(\beta)", color=GREEN).scale(0.7).shift(2.8*DOWN + 1*RIGHT)
+        cos_beta3 = MathTex(r"\cos(\alpha)\cdot\cos(\beta)", color=GREEN).scale(0.7).shift(1*UP+ 11.5*RIGHT)
 
-        self.play(FadeIn(cos_beta3))
+        self.play(cos_beta3.animate.shift(3.8*DOWN + 10*LEFT))
 
         self.wait()
 
-        self.play(FadeOut(grupo_tri_2, label_r, label_s, sen_beta, cos_beta))
+        self.play(FadeOut(grupo_tri_2, label_r, label_s, sen_beta, cos_beta, sen_beta2, cos_beta2))
 
         self.wait()
 
@@ -343,35 +345,35 @@ class SomaArcos(MovingCameraScene):
 
         seno_beta_rosa2 = MathTex(r"u = \sin(\beta)\cdot\sin(\alpha)", color=PINK).shift(9*RIGHT)
 
-        self.play(Transform(seno_beta_rosa, seno_beta_rosa2))
+        self.play(seno_beta_rosa2.animate.shift(1*DOWN))
 
         self.wait()
 
-        seno_beta_rosa3 = MathTex(r"\sin(\beta)\cdot\sin(\alpha)", color=PINK).scale(0.7).shift(3.3*UP + 2.8*RIGHT)
+        seno_beta_rosa3 = MathTex(r"\sin(\beta)\cdot\sin(\alpha)", color=PINK).scale(0.7).shift(1*DOWN + 9*RIGHT)
 
-        self.play(FadeIn(seno_beta_rosa3))
+        self.play(seno_beta_rosa3.animate.shift(4.3*UP + 6*LEFT))
 
         self.wait()
 
-        cos_beta_rosa = MathTex(r"\cos(\beta)=\frac{v}{\sin(\alpha)}", color=PINK).shift(9*RIGHT + 2*DOWN)
+        cos_beta_rosa = MathTex(r"\cos(\beta)=\frac{v}{\sin(\alpha)}", color=PINK).shift(9*RIGHT + 3*DOWN)
 
         self.play(FadeIn(cos_beta_rosa))
 
         self.wait()
 
-        cos_beta_rosa2 = MathTex(r"v = \sin(\alpha)\cdot\cos(\beta)", color=PINK).shift(9*RIGHT + 2*DOWN)
+        cos_beta_rosa2 = MathTex(r"v = \sin(\alpha)\cdot\cos(\beta)", color=PINK).shift(9*RIGHT + 3*DOWN)
 
-        self.play(Transform(cos_beta_rosa, cos_beta_rosa2))
-
-        self.wait()
-
-        cos_beta_rosa3 = MathTex(r"\sin(\alpha)\cdot\cos(\beta)", color=PINK).shift(3.8*RIGHT + 2*UP).scale(0.7).rotate(90*DEGREES)
-
-        self.play(FadeIn(cos_beta_rosa3))
+        self.play(cos_beta_rosa2.animate.shift(1*DOWN))
 
         self.wait()
 
-        self.play(FadeOut(grupo_tri_4, seno_beta_rosa, cos_beta_rosa, label_u, label_v))
+        cos_beta_rosa3 = MathTex(r"\sin(\alpha)\cdot\cos(\beta)", color=PINK).shift(9*RIGHT + 4*DOWN).scale(0.7)
+
+        self.play(cos_beta_rosa3.animate.rotate(90*DEGREES).shift(6*UP + 5.2*LEFT))
+
+        self.wait()
+
+        self.play(FadeOut(grupo_tri_4, seno_beta_rosa, cos_beta_rosa, label_u, label_v, seno_beta_rosa2, cos_beta_rosa2))
 
         self.wait()
 
@@ -387,7 +389,7 @@ class SomaArcos(MovingCameraScene):
         self.play(FadeIn(cos_beta_rosa3_2, sen_beta3_2))
 
         self.play(cos_beta_rosa3.animate.rotate(-90*DEGREES), sen_beta3.animate.rotate(-90*DEGREES))
-        self.play(cos_beta_rosa3.animate.shift(2*DOWN + 2.5*RIGHT), sen_beta3.animate.shift(1.225*UP + 6*RIGHT))
+        self.play(cos_beta_rosa3.animate.shift(2*DOWN + 2.5*RIGHT), sen_beta3.animate.shift(1*UP + 6*RIGHT))
 
         mais1 = MathTex(r"+").shift(7.7*RIGHT)
         self.play(FadeIn(mais1))
@@ -403,8 +405,10 @@ class SomaArcos(MovingCameraScene):
         cos_beta3_2 = cos_beta3.copy()
         seno_beta_rosa3_2 = seno_beta_rosa3.copy()
 
-        self.play(cos_beta3_2.animate.shift(0.25*UP + 5*RIGHT), seno_beta_rosa3_2.animate.shift(5.85*DOWN + 6*RIGHT))
+        self.play(cos_beta3_2.animate.shift(0.25*UP + 4.5*RIGHT), seno_beta_rosa3_2.animate.shift(5.85*DOWN + 5.7*RIGHT))
 
         menos = MathTex(r"-").shift(7.35*RIGHT + 2.55*DOWN)
 
         self.play(FadeIn(menos))
+
+        self.wait(4)
