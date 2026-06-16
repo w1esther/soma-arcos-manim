@@ -6,10 +6,10 @@ class SomaArcos(MovingCameraScene):
 
         self.play(self.camera.frame.animate.scale(1.3))
 
-        plano = NumberPlane(
-            background_line_style={'stroke_opacity': 0.4}
-        )
-        self.add(plano)
+        # plano = NumberPlane(
+        #     background_line_style={'stroke_opacity': 0.4}
+        # )
+        # self.add(plano)
         
         A = np.array([-2, 3, 0])
         B = np.array([-2, -3, 0])
@@ -58,8 +58,11 @@ class SomaArcos(MovingCameraScene):
         linha_perpendicular = Line(C, ponto_perpendicular, color=BLUE)
 
         base_t3 = Line(B, E, color=GREEN)
+        base_t3_copia = base_t3.copy()#aqui
 
-        linha_t3_perpendicular = Line(ponto_perpendicular, E, color=GREEN)
+        linha_t3_perpendicular = Line(ponto_perpendicular, E, color=GREEN) #aqui
+
+        linha_t3_perpendicular_copia = linha_t3_perpendicular.copy() #aqui
 
         self.play(Create(linha_perpendicular))
 
@@ -292,12 +295,15 @@ class SomaArcos(MovingCameraScene):
         self.wait()
 
         tri_4 = Polygon(C, ponto_perpendicular, K, color=PINK, fill_color = PINK, fill_opacity = 0.3)
+        linha_CK = Line(C, K, color=PINK)
 
         self.play(Create(tri_4))
 
         linha_tri_rosa = Line(ponto_perpendicular, K, color=PINK)
 
         linha_perpendicular2 = Line(ponto_perpendicular, C)
+
+        linha_tri_rosa_copia = linha_tri_rosa.copy() # aqui
 
         angulo_beta_rosa = Angle(
             linha_tri_rosa,
@@ -383,6 +389,9 @@ class SomaArcos(MovingCameraScene):
         igual1 = MathTex(r"=").shift(1*UP + 8.8*RIGHT)
         self.play(FadeIn(igual1))
 
+        maiss = MathTex(r'+').shift(3*UP+10*RIGHT)
+        self.play(linha_tri_rosa_copia.animate.shift(0.5*UP + 6*RIGHT), linha_t3_perpendicular_copia.animate.shift(4*UP + 7*RIGHT), FadeIn(maiss))
+
         cos_beta_rosa3_2 = cos_beta_rosa3.copy()
         sen_beta3_2 = sen_beta3.copy()
 
@@ -397,6 +406,9 @@ class SomaArcos(MovingCameraScene):
         cos_alfa_beta3_2 = sen_alfa_beta3.copy()
 
         self.play(cos_alfa_beta3_2.animate.shift(7.3*RIGHT + 2*UP))
+        self.play(base_t3_copia.animate.shift(6.5*RIGHT), linha_CK.animate.shift(6.3*DOWN + 4.2*RIGHT))
+        menoss = MathTex(r'-').shift(3.15*DOWN + 7*RIGHT)
+        self.play(FadeIn(menoss))
 
         igual2 = igual1.copy()
         igual2.shift(2.4*DOWN)
